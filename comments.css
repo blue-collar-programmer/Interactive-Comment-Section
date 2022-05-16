@@ -1,0 +1,20 @@
+html, body {
+    margin:none;
+    font-family: 'Rubik', sans-serif;;
+}
+
+p {
+    font-size: 16px;
+}
+
+.mainConatiner {
+    width: 90%;
+    margin: auto;
+    background-color: darkcyan;
+}
+
+.commentConatiner {
+    width: 90%;
+    margin: auto;
+    background-color: coral;
+}
