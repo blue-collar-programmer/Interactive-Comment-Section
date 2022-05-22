@@ -1,20 +1,103 @@
 html, body {
     margin:none;
-    font-family: 'Rubik', sans-serif;;
+    font-family: 'Rubik', sans-serif;
+    background-color: hsl(223, 19%, 93%);
 }
 
 p {
     font-size: 16px;
+    color: hsl(211, 10%, 45%);
+    line-height: 1.6em;
 }
 
 .mainConatiner {
-    width: 90%;
+    width: 100%;
     margin: auto;
     background-color: darkcyan;
 }
 
 .commentConatiner {
+    min-width: 375px;
+    max-width: 600px;
     width: 90%;
     margin: auto;
-    background-color: coral;
+    background-color: hsl(228, 33%, 97%);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.userInfoFlexContainer{
+    display: flex;
+    justify-content: flex-start;
+    align-items:center;
+}
+
+/*.votingContainer {
+    display: flex; //use this after the breakpoint
+    align-items: center;
+    
+}*/
+
+
+.userinfo{
+    padding-right: 23px;
+}
+
+.avatar {
+    width: 50px;
+}
+
+.userActionsFlexContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.votingContainer{
+    display: flex; 
+    align-items: center;
+    justify-content: space-around;
+    height: 30px;
+    background-color: hsl(223, 19%, 93%);
+    padding-top: 8px;
+    border-radius: 6px
+}
+
+.voteCount {
+    color: hsl(238, 40%, 52%);
+    font-weight: 500;
+    background-color: hsl(223, 19%, 93%);
+    padding: 0px 10px;
+    width: 12px;
+    margin: 1px auto;
+    text-align: center;
+    height: 100%;
+}
+
+.iconButtons {
+    width: 12px;
+    padding: 0px 11px ;
+    background-color: hsl(223, 19%, 93%);
+    margin: 1px auto;
+    height: 100%;
+    border-radius: 6px;
+}
+
+
+.iconButtons:hover {
+    cursor: pointer;
+}
+
+.votingIcons:hover {
+ cursor: pointer;
+ background-color: hsl(238, 40%, 52%);
+ padding: 1px;
+}
+
+.minus {
+ margin-bottom: 2px;   
+}
+
+.minusButton {
+    height: 100%;
 }
