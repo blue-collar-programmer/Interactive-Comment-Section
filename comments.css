@@ -16,7 +16,7 @@ p {
     background-color: darkcyan;
 }
 
-.commentConatiner {
+.commentContainer {
     min-width: 375px;
     max-width: 600px;
     width: 90%;
@@ -25,6 +25,11 @@ p {
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 15px;
+}
+
+.newCommentBox {
+    display:flex;
+    justify-content: space-between;
 }
 
 .userInfoFlexContainer{
@@ -42,6 +47,10 @@ p {
 
 .userinfo{
     padding-right: 23px;
+}
+
+.username {
+    font-size: 1em;
 }
 
 .avatar {

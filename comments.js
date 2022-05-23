@@ -1,6 +1,7 @@
-const mainContainer = document.getElementById('mainContainer');
-
-
+const allCommentsContainer = document.getElementById('allCommentsContainer');
+const createNewCommentBox = document.createElement('div');
+const currentUsersAvatar = document.getElementById('currentUsersAvatar');
+ 
 async function getCommentsData(url) {
     try {
         let response = await fetch(url);
@@ -30,7 +31,7 @@ getCommentsData('data.json')
             }
         }
         console.log('Final score test=>', origScore)
-
+        currentUsersAvatar.src=`${data.currentUser.image.png}`
         // first render the comments properties
         // next add a .then and render the replies, assigning their on container/ class etc. to them
         const comments = data.comments;
@@ -38,8 +39,8 @@ getCommentsData('data.json')
         comments.forEach((row, i )=> {
 
             const commentContainer = document.createElement('div');
-            mainContainer.appendChild(commentContainer);
-            commentContainer.classList.add('commentConatiner');
+            allCommentsContainer.appendChild(commentContainer);
+            commentContainer.classList.add('commentContainer');
 
             const userInfoFlexContainer = document.createElement('div');
             commentContainer.appendChild(userInfoFlexContainer);
@@ -160,7 +161,7 @@ getCommentsData('data.json')
 
 
 
-                   
+
                     voteCount.innerHTML = `
                 ${localStorage.getItem('newDownScore') - 1}                 `
 
@@ -181,3 +182,20 @@ getCommentsData('data.json')
         });
 
     })
+    
+
+
+
+    /* HERE I NEED TO TEST THE COMMENT TEXT BOX 
+    - How it is rendered? on the bottom of allComments?
+    - or on the top
+    - why create outside of the api call?
+    - because everytime a user post a comment I want to
+        1. an event listener fired on the POST button
+        2. I want a function specifically named createNewComment to be called in that eventListener
+        3. createNewComment, will pretty much copy the rendered style names of the dynamically rendered content in the original api call
+        4. how to udate the server data i.e the JSON file when a new comment is created? 
+            - Create a seperate function for that? and call in the the createNewComment function using Logic
+            - new function name will ansyn function postNewComment (url) // find out how to make a post call with RESTful api fetch/ headers  
+    
+    */
