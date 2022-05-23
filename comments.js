@@ -1,7 +1,35 @@
 const allCommentsContainer = document.getElementById('allCommentsContainer');
 const createNewCommentBox = document.createElement('div');
 const currentUsersAvatar = document.getElementById('currentUsersAvatar');
- 
+const commentTextArea = document.getElementById('commentTextArea');
+let clickCount = 0;
+
+// Comment area eventListener
+commentTextArea.addEventListener('click', (e)=>{
+    clickCount++
+    console.log('this is the eventTarget=>', e)
+    if (clickCount % 2 === 0){
+        unActiveBorderStyles(e.target)
+    } else {
+        activeBorderStyles(e.target)    
+    }
+
+})
+//gives a border shadow to the textarea
+let activeBorderStyles = (el)=>{
+    let textArea = el;
+    return textArea.style.cssText = "box-shadow: 0px 0px 8px  hsl(238, 40%, 52%);"
+    
+}
+//removes border shadow from the textarea
+let unActiveBorderStyles = (el)=>{
+    let textArea = el;
+    return textArea.style.cssText = "box-shadow: none;"
+    
+}
+
+
+
 async function getCommentsData(url) {
     try {
         let response = await fetch(url);
@@ -76,7 +104,14 @@ getCommentsData('data.json')
             // Create a div that displays the number of votes in real time 
             const voteCount = document.createElement('p');
             votingContainer.appendChild(voteCount);
-            voteCount.classList.add('voteCount')
+            voteCount.classList.add('voteCount');
+
+            const replyButton = document.createElement('button')
+            replyButton.className = "replyButton";
+            replyButton.innerHTML = `
+            <img class= "replyIcon" src = "../images/icon-reply.svg"> Reply
+            `
+            userActionsFlexContainer.appendChild(replyButton);
             
             voteCount.innerHTML = `
             ${localStorage.getItem(origScore[i])}
@@ -91,12 +126,11 @@ getCommentsData('data.json')
             
             plusButton.addEventListener('click', (e) => {
                 let clickCount = 0;
-                if ( /*localStorage.getItem('plusCount')*/ clickCount >= 1) {
+                /*if ( clickCount >= 1) {
                     alert('you can only give one upvote per user')
-                } 
+                } */
 
                 if(localStorage.getItem('newDownScore') === localStorage.getItem(origScore[i]) - 1){
-                    console.log(true, 'THIS IS FINALLY IT! VALUE', 'The value is this=>', localStorage.getItem(origScore[i])-1 )
                     clickCount++
                     localStorage.setItem('plusCount', `${clickCount}`)
 
