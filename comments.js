@@ -62,8 +62,11 @@ getCommentsData('data.json')
         currentUsersAvatar.src=`${data.currentUser.image.png}`
         // first render the comments properties
         // next add a .then and render the replies, assigning their on container/ class etc. to them
+        
+// Initiated the data obj and the comment properties to a const variable named, "comments"
         const comments = data.comments;
         console.log('Testing each comment object=> ', comments);
+
         comments.forEach((row, i )=> {
 
             const commentContainer = document.createElement('div');
@@ -123,113 +126,68 @@ getCommentsData('data.json')
             minusButton.innerHTML = `
             <img class = "votingIcons minus" src="../images/icon-minus.svg">
             `
-            
+/* A new global scoped variable (in the context of this api call) to keep track of each users vote
+        Can be used and accessed by both event handlers to: create, read , update, and delete the last value in localStorage          
+
+*/            
+           
+
             plusButton.addEventListener('click', (e) => {
-                let clickCount = 0;
+
+                console.log('origScore =>',Number(localStorage.getItem(origScore[i])) + 1)
+
+                let plusClicks = 0;
+                plusClicks++
+                let newVoteCount = Number(localStorage.getItem(origScore[i])) + plusClicks;
+                localStorage.setItem('newVoteCount', `${newVoteCount}`);
+
+                if(localStorage.getItem('newVoteCount') === 0 || localStorage.getItem('newVoteCount') === null || localStorage.getItem('newVoteCount') === undefined){
+                    console.log('FIRED ONE!');
+                    voteCount.innerHTML= `
+                    ${localStorage.getItem(origScore[i])}
+                    
+                    `
+                } else {
+                    console.log('FIRED TWO!=>')
+                    voteCount.innerHTML= `
+                    ${localStorage.getItem('newVoteCount')}
+                    `
+                }
+
+                if( Number(localStorage.getItem('newVoteCount')) > Number(localStorage.getItem(origScore[i])) + 1){
+                        console.log('FIRED THREE!')
+                        voteCount.innerHTML= `
+                        ${Number(localStorage.getItem('newVoteCount')) - 1}
+                        
+                       ` 
+                }
+                    
+                
                 /*if ( clickCount >= 1) {
                     alert('you can only give one upvote per user')
                 } */
-
-                if(localStorage.getItem('newDownScore') === localStorage.getItem(origScore[i]) - 1){
-                    clickCount++
-                    localStorage.setItem('plusCount', `${clickCount}`)
-
-                    //${Number(localStorage.getItem('newDownScore')) + 1}//Number(localStorage.getItem('plusCount')) };
-                    voteCount.innerHTML = `
-                    ${localStorage.getItem(origScore[i])}
-                    `
-                    
-                } 
                 
-                else {
-
-                    clickCount++
-                    // saving the current users (clients) click count in the localStorage to prevent voting twice
-                    localStorage.setItem('plusCount', `${clickCount}`)
-                    // Testing the type of row.score because when adding plusCount in the locaStorage it would concat not evaluate                
-                    //console.log(typeof row.score, 'plusButton fire test');
-                    console.log(true, 'THIS IS THE VALUE',  origScore[i] )//A TEST 
-                    voteCount.innerHTML = `
-                    ${row.score + Number(localStorage.getItem('plusCount'))}
-                    `
-                    let newScoreValue = row.score + Number(localStorage.getItem('plusCount'))
-                    
-                    localStorage.setItem('newUpScore', newScoreValue)
-                    localStorage.removeItem('newDownScore');
-                    localStorage.removeItem('plusCount');
-                }
+                plusClicks = 0;
             })
 
             minusButton.addEventListener('click', (e) => {
-                let clickCount = 0;
+                let minusClicks = 0;
+                minusClicks++
                 if ( /*localStorage.getItem('plusCount')*/ clickCount >= 1) {
                     alert('you can only give one downvote per user')
                 }
 
-                if (localStorage.getItem('newUpScore') > origScore[i]) {
+                minusClicks = 0;
+       })
+            
 
-                    clickCount++
-
-                    localStorage.setItem('minusCount', `${clickCount}`)
-
-                    console.log('original score index=>' ,origScore[i], 'minusButton fire test');
-
-                    voteCount.innerHTML = `
-                ${Number(localStorage.getItem('newUpScore')) - Number(localStorage.getItem('minusCount'))}
-                
-                `
-                localStorage.removeItem('minusCount')
-
-                    // the above needs error handling- what if newUpScore was erased and doesn't exist?                
-                    let newScoreValue = Number(localStorage.getItem('newUpScore')) - 1;//Number(localStorage.getItem('minusCount'))
-                    console.log('newDownScore VALUE IN THE 2ND IF MINUS BLOCK =>',newScoreValue, Number(localStorage.getItem('newUpScore')))
-                    localStorage.removeItem('newUpScore');
-                    localStorage.setItem('newDownScore', `${newScoreValue}`);
-                }
-                
-                if (localStorage.getItem('newDownScore') >= row.score) {
-                    console.log(true, 'YES', 'heres new score=>', localStorage.getItem('newDownScore'))
-                    //clickCount++
-
-                   // localStorage.setItem('minusCount', `${clickCount}`)
-
-
-
-
-                    voteCount.innerHTML = `
-                ${localStorage.getItem('newDownScore') - 1}                 `
-
-                //-START HERE!!!!!!!!!!
-
-                }
-                let newScore = localStorage.getItem('newDownScore') - 1;
-                localStorage.setItem(`newDownScore`, newScore);// localStorage should read 11 or 5
-            })
-            /* Create plus and minus button, insert img tag as the content
-                        -in the middle of these buttons place a div and give it the id = voteCount
-                        - add click event to both, but use Id to determine the behaviour
-                        - example: plus.addEventListener('click', (e)=>{
-                            voteCount.innerHTML = ""
-                        })
-            */
-
-        });
+        })
 
     })
     
 
+// add clickCount as the parameter to a function whos job is to increase the displayed vote count:
+// - then saving it to the local storage ,and displaying it to in the innerHTML = '';
 
 
-    /* HERE I NEED TO TEST THE COMMENT TEXT BOX 
-    - How it is rendered? on the bottom of allComments?
-    - or on the top
-    - why create outside of the api call?
-    - because everytime a user post a comment I want to
-        1. an event listener fired on the POST button
-        2. I want a function specifically named createNewComment to be called in that eventListener
-        3. createNewComment, will pretty much copy the rendered style names of the dynamically rendered content in the original api call
-        4. how to udate the server data i.e the JSON file when a new comment is created? 
-            - Create a seperate function for that? and call in the the createNewComment function using Logic
-            - new function name will ansyn function postNewComment (url) // find out how to make a post call with RESTful api fetch/ headers  
     
-    */
