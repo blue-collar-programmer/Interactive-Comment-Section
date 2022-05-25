@@ -115,10 +115,25 @@ getCommentsData('data.json')
             <img class= "replyIcon" src = "../images/icon-reply.svg"> Reply
             `
             userActionsFlexContainer.appendChild(replyButton);
+            if (localStorage.getItem('newVoteCount') === undefined || localStorage.getItem('newVoteCount') === localStorage.getItem(origScore[i])) {
 
-            voteCount.innerHTML = `
-            ${localStorage.getItem(origScore[i])}
-            `
+                voteCount.innerHTML = `
+            
+                ${localStorage.getItem(origScore[i])}
+            
+                `
+            } else if (localStorage.getItem('newVoteCount') > localStorage.getItem(origScore[i]) || localStorage.getItem('newVoteCount') < localStorage.getItem(origScore[i])) {
+
+                voteCount.innerHTML = `
+            
+                ${localStorage.getItem('newVoteCount')}
+            
+                `
+
+            }
+
+
+
             const minusButton = document.createElement('minusButton');
             votingContainer.appendChild(minusButton);
             minusButton.classList.add('iconButtons');
@@ -135,22 +150,20 @@ getCommentsData('data.json')
                 let newVoteCount;
 
                 if (localStorage.getItem('newVoteCount') < localStorage.getItem(origScore[i]) || localStorage.getItem('newVoteCount') === undefined) {
-console.log('fired')
 
                     newVoteCount = Number(localStorage.getItem(origScore[i]));
                     localStorage.setItem('newVoteCount', newVoteCount);
-                    
+
                     voteCount.innerHTML = `
                     ${Number(localStorage.getItem('newVoteCount'))}
                     `
 
 
                 } else if (Number(localStorage.getItem('newVoteCount')) === Number(localStorage.getItem(origScore[i]))) {
-                    console.log('fired2')
-                    
+
                     newVoteCount = Number(localStorage.getItem(origScore[i])) + plusClicks;
                     localStorage.setItem('newVoteCount', newVoteCount)
-                    
+
                     voteCount.innerHTML = `
                     
                     ${Number(localStorage.getItem('newVoteCount'))}
@@ -160,9 +173,6 @@ console.log('fired')
                 }
 
 
-                /*if ( clickCount >= 1) {
-                    alert('you can only give one upvote per user')
-                } */
 
                 plusClicks = 0;
             })
@@ -175,10 +185,10 @@ console.log('fired')
                 let newVoteCount;
 
                 if (localStorage.getItem('newVoteCount') > localStorage.getItem(origScore[i]) || localStorage.getItem('newVoteCount') === undefined) {
-                    
-                    newVoteCount = Number(localStorage.getItem(origScore[i])) ;
+
+                    newVoteCount = Number(localStorage.getItem(origScore[i]));
                     localStorage.setItem('newVoteCount', newVoteCount)
-                    
+
                     voteCount.innerHTML = `
                 
                 ${Number(localStorage.getItem('newVoteCount'))}
@@ -186,10 +196,10 @@ console.log('fired')
                 `
 
                 } else if (Number(localStorage.getItem('newVoteCount')) === Number(localStorage.getItem(origScore[i]))) {
-                    
+
                     newVoteCount = Number(localStorage.getItem(origScore[i])) - minusClicks;
                     localStorage.setItem('newVoteCount', newVoteCount);
-                    
+
                     voteCount.innerHTML = `
 
                     ${Number(localStorage.getItem('newVoteCount'))}
@@ -200,12 +210,7 @@ console.log('fired')
                 minusClicks = 0;
             })
 
-            window.location.refresh = function() {
-                console.log('LOAD EVENT FIRED ')
-                voteCount.innerHTML = `
-                ${localStorage.getItem('newVoteCount')}
-                `
-            }
+
         })
 
     })
