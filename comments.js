@@ -73,6 +73,13 @@ getCommentsData('data.json')
             allCommentsContainer.appendChild(commentContainer);
             commentContainer.classList.add('commentContainer');
 
+            const repliesContainer = document.createElement('div');
+            allCommentsContainer.appendChild(repliesContainer);
+            repliesContainer.className = 'repliesContainer'
+            repliesContainer.id = 'repliesContainer'
+            
+            
+
             const userInfoFlexContainer = document.createElement('div');
             commentContainer.appendChild(userInfoFlexContainer);
             userInfoFlexContainer.classList.add('userInfoFlexContainer');
