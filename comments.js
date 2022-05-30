@@ -96,52 +96,15 @@ getCommentsData('data.json')
              <h5 class= 'userinfo username'>${row.user.username}</h5>
              <p class= 'userinfo commentDate'>${row.createdAt}</p>
              `
-                    //_________________________________________________________________
-                    // focus on the below issues
 
-                    // below is the the replies container, I am attempting to reuse the code for the 
-                    // userinfoflexcontainer but have to change the path to the content
-
-                    /* The purpose for the if staement?
-
-                    -The reason is to control when and if the replies container is displayed or not
-                    - Based on what? Based on whether the replies array inside of the comments obj have content or are empty i.e undefined 
-
-                    */
-                    if (row.replies[i] === undefined) {
-
-                        repliesFlexContainer.style.display = "none";
-
-                    } else {
-                        /*
-                             -Below I used a for of loop to loop through replies array within every comment object 
-                             -Then render every user object within the replies array one by one
-                             -This should work for every reply in the replies array               
-
-                        */
-                        for (reply of row.replies) {
-                            //testing the outout
-                            console.log('TESTING REPLIES ARRAY IN THE SECOND COMMENT OBJECT =>', reply)
-
-                            infoReplyContainer = document.createElement('div')
-                            repliesFlexContainer.appendChild(infoReplyContainer)
-                            infoReplyContainer.className = "userInfoFlexContainer"
-                            infoReplyContainer.innerHTML = `
-             <img class= 'userinfo avatar' src= "${reply.user.image.png}"/>
-             <h5 class= 'userinfo username'>${reply.user.username}</h5>
-             <p class= 'userinfo commentDate'>${reply.createdAt}</p>
-             `
-
-                        }
-                        }
-
-
-
-                        const userCommentText = document.createElement('p');
+             
+             
+             
+             const userCommentText = document.createElement('p');
                         commentContainer.appendChild(userCommentText);
                         userCommentText.classList.add('userCommentText');
                         userCommentText.innerHTML = `${row.content}`;
-
+                        
                         const userActionsFlexContainer = document.createElement('div');
                         commentContainer.appendChild(userActionsFlexContainer);
                         userActionsFlexContainer.classList.add('userActionsFlexContainer');
@@ -172,28 +135,28 @@ getCommentsData('data.json')
                         if (localStorage.getItem('newVoteCount') === undefined || localStorage.getItem('newVoteCount') === localStorage.getItem(origScore[i])) {
 
                             voteCount.innerHTML = `
-            
-                ${localStorage.getItem(origScore[i])}
-            
-                `
+                            
+                            ${localStorage.getItem(origScore[i])}
+                            
+                            `
                         } else if (localStorage.getItem('newVoteCount') > localStorage.getItem(origScore[i]) || localStorage.getItem('newVoteCount') < localStorage.getItem(origScore[i])) {
-
+                            
                             voteCount.innerHTML = `
-            
-                ${localStorage.getItem('newVoteCount')}
-            
-                `
+                            
+                            ${localStorage.getItem('newVoteCount')}
+                            
+                            `
 
                         }
 
 
-
+                        
                         const minusButton = document.createElement('minusButton');
                         votingContainer.appendChild(minusButton);
                         minusButton.classList.add('iconButtons');
                         minusButton.classList.add('minusButton');
                         minusButton.innerHTML = `
-            <img class = "votingIcons minus" src="../images/icon-minus.svg">
+                        <img class = "votingIcons minus" src="../images/icon-minus.svg">
             `
 
                         plusButton.addEventListener('click', (e) => {
@@ -202,7 +165,7 @@ getCommentsData('data.json')
                             let plusClicks = 0;
                             plusClicks++
                             let newVoteCount;
-
+                            
                             if (localStorage.getItem('newVoteCount') < localStorage.getItem(origScore[i]) || localStorage.getItem('newVoteCount') === undefined) {
 
                                 newVoteCount = Number(localStorage.getItem(origScore[i]));
@@ -213,12 +176,12 @@ getCommentsData('data.json')
                     `
 
 
-                            } else if (Number(localStorage.getItem('newVoteCount')) === Number(localStorage.getItem(origScore[i]))) {
-
-                                newVoteCount = Number(localStorage.getItem(origScore[i])) + plusClicks;
-                                localStorage.setItem('newVoteCount', newVoteCount)
-
-                                voteCount.innerHTML = `
+                } else if (Number(localStorage.getItem('newVoteCount')) === Number(localStorage.getItem(origScore[i]))) {
+                    
+                    newVoteCount = Number(localStorage.getItem(origScore[i])) + plusClicks;
+                    localStorage.setItem('newVoteCount', newVoteCount)
+                    
+                    voteCount.innerHTML = `
                     
                     ${Number(localStorage.getItem('newVoteCount'))}
                     
@@ -226,8 +189,8 @@ getCommentsData('data.json')
 
                             }
 
-
-
+                            
+                            
                             plusClicks = 0;
                         })
 
@@ -239,35 +202,70 @@ getCommentsData('data.json')
                             let newVoteCount;
 
                             if (localStorage.getItem('newVoteCount') > localStorage.getItem(origScore[i]) || localStorage.getItem('newVoteCount') === undefined) {
-
+                                
                                 newVoteCount = Number(localStorage.getItem(origScore[i]));
                                 localStorage.setItem('newVoteCount', newVoteCount)
-
+                                
                                 voteCount.innerHTML = `
-                
-                ${Number(localStorage.getItem('newVoteCount'))}
-
-                `
-
+                                
+                                ${Number(localStorage.getItem('newVoteCount'))}
+                                
+                                `
+                                
                             } else if (Number(localStorage.getItem('newVoteCount')) === Number(localStorage.getItem(origScore[i]))) {
-
+                                
                                 newVoteCount = Number(localStorage.getItem(origScore[i])) - minusClicks;
                                 localStorage.setItem('newVoteCount', newVoteCount);
-
+                                
                                 voteCount.innerHTML = `
-
-                    ${Number(localStorage.getItem('newVoteCount'))}
-
-                    `
+                                
+                                ${Number(localStorage.getItem('newVoteCount'))}
+                                
+                                `
                             }
                             // localStorage.removeItem('minusClicks');
                             minusClicks = 0;
                         })
-
-
+                        
+                        
+                        // below is the the replies container, I am attempting to reuse the code for the 
+                        // userinfoflexcontainer but have to change the path to the content
+           
+                        /* The purpose for the if staement?
+           
+                        -The reason is to control when and if the replies container is displayed or not
+                        - Based on what? Based on whether the replies array inside of the comments obj have content or are empty i.e undefined 
+           
+                        */
+                        if (row.replies[i] === undefined) {
+           
+                            repliesFlexContainer.style.display = "none";
+           
+                        } else {
+                            /*
+                                 -Below I used a for of loop to loop through replies array within every comment object 
+                                 -Then render every user object within the replies array one by one
+                                 -This should work for every reply in the replies array               
+           
+                            */
+                            for (reply of row.replies) {
+                                //testing the outout
+                                console.log('TESTING REPLIES ARRAY IN THE SECOND COMMENT OBJECT =>', reply)
+           
+                                infoReplyContainer = document.createElement('div')
+                                repliesFlexContainer.appendChild(infoReplyContainer)
+                                infoReplyContainer.className = "userInfoFlexContainer"
+                                infoReplyContainer.innerHTML = `
+                 <img class= 'userinfo avatar' src= "${reply.user.image.png}"/>
+                 <h5 class= 'userinfo username'>${reply.user.username}</h5>
+                 <p class= 'userinfo commentDate'>${reply.createdAt}</p>
+                 `
+           
+                            }
+                            }
                     })
-
-
+                    
+                    
 
             })
 
