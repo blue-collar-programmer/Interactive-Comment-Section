@@ -76,16 +76,9 @@ getCommentsData('data.json')
                     const repliesFlexContainer = document.createElement('div');
                     allCommentsContainer.appendChild(repliesFlexContainer);
                     repliesFlexContainer.className = 'repliesFlexContainer';
-                    repliesFlexContainer.id = 'repliesFlexContainer' [i];
 
-                    /* const repliesContent = document.createElement('div');
-                     repliesFlexContainer.appendChild(repliesContent);
-                     repliesFlexContainer.className = 'repliesContent';*/
-                    //--THIS may notn need an ID--repliesContent.id = 'repliesContent' 
-                    /* if(row.id[i].replies != ""){
-                     }*/
-
-
+                    
+                    
 
                     const userInfoFlexContainer = document.createElement('div');
                     commentContainer.appendChild(userInfoFlexContainer);
@@ -230,7 +223,7 @@ getCommentsData('data.json')
                         
                         // below is the the replies container, I am attempting to reuse the code for the 
                         // userinfoflexcontainer but have to change the path to the content
-           
+                        
                         /* The purpose for the if staement?
            
                         -The reason is to control when and if the replies container is displayed or not
@@ -248,19 +241,30 @@ getCommentsData('data.json')
                                  -This should work for every reply in the replies array               
            
                             */
+// Start debugging process below here! ____________________________________________________________________________________________________                           
                             for (reply of row.replies) {
                                 //testing the outout
                                 console.log('TESTING REPLIES ARRAY IN THE SECOND COMMENT OBJECT =>', reply)
-           
-                                infoReplyContainer = document.createElement('div')
-                                repliesFlexContainer.appendChild(infoReplyContainer)
+                                
+                                 let repliesContent = document.createElement('div');
+                                 repliesFlexContainer.appendChild(repliesContent);
+                                 repliesContent.className = 'repliesContent';
+                                //--THIS may notn need an ID--repliesContent.id = 'repliesContent' 
+                                /* if(row.id[i].replies != ""){
+                                 }*/
+                                
+                               let infoReplyContainer = document.createElement('div')
+                                repliesContent.appendChild(infoReplyContainer)
                                 infoReplyContainer.className = "userInfoFlexContainer"
                                 infoReplyContainer.innerHTML = `
                  <img class= 'userinfo avatar' src= "${reply.user.image.png}"/>
                  <h5 class= 'userinfo username'>${reply.user.username}</h5>
                  <p class= 'userinfo commentDate'>${reply.createdAt}</p>
                  `
-           
+                /* repliesFlexContainer.appendChild(userCommentText);
+                 userCommentText.innerHTML = `
+                 ${reply.content}
+                 `*/
                             }
                             }
                     })
