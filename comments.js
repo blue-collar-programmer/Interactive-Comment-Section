@@ -260,7 +260,16 @@ getCommentsData('data.json')
                  <img class= 'userinfo avatar' src= "${reply.user.image.png}"/>
                  <h5 class= 'userinfo username'>${reply.user.username}</h5>
                  <p class= 'userinfo commentDate'>${reply.createdAt}</p>
-                 `
+                 `      
+//                  
+                                let repliesText = document.createElement('p');
+                                repliesContent.appendChild(repliesText)
+                                repliesText.className = "userCommentText";
+                                repliesText.innerHTML = `
+                                
+                                ${reply.content}
+                                
+                                `         
                 /* repliesFlexContainer.appendChild(userCommentText);
                  userCommentText.innerHTML = `
                  ${reply.content}

@@ -25,7 +25,6 @@ p {
     /*background-color: hsl(228, 33%, 97%);*/
     padding: 15px 20px;
     border-radius: 10px;
-    margin-bottom: 15px;
 }
 
 /*.newCommentBox {
@@ -211,15 +210,25 @@ p {
     width: 80%;
     border-radius: 1px;
     margin: auto;
-    padding: 15px 20px;
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 15px;
     
     /*display: none;*/
 }
 
 
 .repliesContent {
-    background-color: blue;
+    background-color: white;
     width:97%;
     border-radius: 10px;
     padding: 15px 20px;
+    margin-bottom: 15px;
+}
+
+.repliesContent:last-child {
+    margin-bottom: 0;
 }
