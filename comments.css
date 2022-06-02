@@ -232,3 +232,9 @@ p {
 /*.repliesText {
     padding-left: 20px;
 }*/
+.youReplied {
+    background-color:  hsl(238, 40%, 52%);
+    border-radius: 2px;
+    padding: 3px 8px;
+    color: white;
+}

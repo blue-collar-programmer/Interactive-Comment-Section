@@ -341,6 +341,7 @@ getCommentsData('data.json')
                  <h6 class= "userinfo youReplied">you</h6>
                  <p class= 'userinfo commentDate'>${reply.createdAt}</p>
                  `
+                 infoReplyContainer.style.justifyContent = "space-around"
                     //                  
                     let repliesText = document.createElement('p');
                     repliesContent.appendChild(repliesText)
