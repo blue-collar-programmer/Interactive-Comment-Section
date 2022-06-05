@@ -296,13 +296,18 @@ getCommentsData('data.json')
                                 minusButton.innerHTML = `
                         <img class = "votingIcons minus" src="../images/icon-minus.svg">
                         `
-                                replyButton = document.createElement('button')
-                                replyButton.className = "replyButton";
-                                userActionsFlexContainer.appendChild(replyButton);
-                                replyButton.innerHTML = `
-                        <img class= "replyIcon" src = "../images/icon-delete.svg"> Reply
+                                deleteButton = document.createElement('button')
+                                deleteButton.className = "deleteButton";
+                                userActionsFlexContainer.appendChild(deleteButton);
+                                deleteButton.innerHTML = `
+                        <img class= "deleteIcon" src = "../images/icon-delete.svg"> Delete
                         `
-            
+                        editButton = document.createElement('button')
+                        editButton.className = "editButton";
+                        userActionsFlexContainer.appendChild(editButton);
+                        editButton.innerHTML = `
+                <img class= "editIcon" src = "../images/icon-edit.svg"> Edit
+                `
             
                             }
             

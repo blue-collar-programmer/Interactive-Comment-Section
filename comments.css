@@ -238,3 +238,35 @@ p {
     padding: 3px 8px;
     color: white;
 }
+
+.deleteButton {
+    width:95px;
+    height: 42px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    color:  hsl(358, 79%, 66%);
+    background-color: transparent;   
+}
+
+.deleteButton:hover {
+    cursor: pointer;
+    background-color:  hsl(357, 100%, 86%);
+}
+
+.editButton {
+    width:95px;
+    height: 42px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    color:   hsl(238, 40%, 52%);;
+    background-color: transparent;
+}
+
+.editButton:hover {
+    cursor: pointer;
+    background-color:hsl(223, 19%, 93%) ;
+}
