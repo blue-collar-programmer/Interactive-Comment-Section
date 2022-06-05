@@ -138,6 +138,185 @@ getCommentsData('data.json')
                         <img class = "votingIcons minus" src="../images/icon-minus.svg">
             `
 
+               // below is the the replies container, I am attempting to reuse the code for the 
+            // userinfoflexcontainer but have to change the path to the content
+
+            /* The purpose for the if staement?
+           
+                        -The reason is to control when and if the replies container is displayed or not
+                        - Based on what? Based on whether the replies array inside of the comments obj have content or are empty i.e undefined 
+           
+                        */
+                        if (row.replies[i] === undefined) {
+
+                            repliesFlexContainer.style.display = "none";
+            
+                        } else {
+                            /*
+                                             -Below I used a for of loop to loop through replies array within every comment object 
+                                             -Then render every user object within the replies array one by one
+                                             -This should work for every reply in the replies array               
+                       
+                                        */
+                            // Start debugging process below here! ____________________________________________________________________________________________________                           
+                            for (reply of row.replies) {
+                                //testing the outout
+                                console.log('TESTING REPLIES ARRAY IN THE SECOND COMMENT OBJECT =>', reply)
+            
+                                if(reply.user.username !== data.currentUser.username){
+            
+                                let repliesContent = document.createElement('div');
+                                repliesFlexContainer.appendChild(repliesContent);
+                                repliesContent.className = 'repliesContent';
+                                //--THIS may notn need an ID--repliesContent.id = 'repliesContent' 
+                                /* if(row.id[i].replies != ""){
+                                 }*/
+            
+                                let infoReplyContainer = document.createElement('div')
+                                repliesContent.appendChild(infoReplyContainer)
+                                infoReplyContainer.className = "userInfoFlexContainer"
+                                infoReplyContainer.innerHTML = `
+                             <img class= 'userinfo avatar' src= "${reply.user.image.png}"/>
+                             <h5 class= 'userinfo username'>${reply.user.username}</h5>
+                             <p class= 'userinfo commentDate'>${reply.createdAt}</p>
+                             `
+                                //                  
+                                let repliesText = document.createElement('p');
+                                repliesContent.appendChild(repliesText)
+                                repliesText.className = "userCommentText";
+                                repliesText.classList.add('repliesText');
+                                repliesText.innerHTML = `
+                                            
+                                            ${reply.content}
+                                            
+                                            `
+            
+                                userActionsFlexContainer = document.createElement('div');
+                                repliesContent.appendChild(userActionsFlexContainer);
+                                userActionsFlexContainer.classList.add('userActionsFlexContainer');
+            
+                                votingContainer = document.createElement('div');
+                                userActionsFlexContainer.appendChild(votingContainer);
+                                votingContainer.classList.add('votingContainer');
+            
+                                plusButton = document.createElement('plusButton');
+                                votingContainer.appendChild(plusButton);
+                                plusButton.classList.add('iconButtons');
+                                plusButton.innerHTML = `
+                        <img class= "votingIcons" src="../images/icon-plus.svg">
+                        `
+            
+                                // Create a div that displays the number of votes in real time 
+                                voteCount = document.createElement('p');
+                                votingContainer.appendChild(voteCount);
+                                voteCount.classList.add('voteCount');
+                                voteCount.innerHTML= `
+                                
+                                ${reply.score}
+                                
+                                `
+            
+                                replyButton = document.createElement('button')
+                                replyButton.className = "replyButton";
+                                userActionsFlexContainer.appendChild(replyButton);
+                                replyButton.innerHTML = `
+                        <img class= "replyIcon" src = "../images/icon-reply.svg"> Reply
+                        `
+            
+                                minusButton = document.createElement('minusButton');
+                                votingContainer.appendChild(minusButton);
+                                minusButton.classList.add('iconButtons');
+                                minusButton.classList.add('minusButton');
+                                minusButton.innerHTML = `
+                        <img class = "votingIcons minus" src="../images/icon-minus.svg">
+            `
+                                /* repliesFlexContainer.appendChild(userCommentText);
+                                 userCommentText.innerHTML = `
+                                 ${reply.content}
+                                 `*/
+                            } else {
+            
+                                let repliesContent = document.createElement('div');
+                                repliesFlexContainer.appendChild(repliesContent);
+                                repliesContent.className = 'repliesContent';
+                                //--THIS may notn need an ID--repliesContent.id = 'repliesContent' 
+                                /* if(row.id[i].replies != ""){
+                                 }*/
+            
+                                let infoReplyContainer = document.createElement('div')
+                                repliesContent.appendChild(infoReplyContainer)
+                                infoReplyContainer.className = "userInfoFlexContainer"
+                                infoReplyContainer.innerHTML = `
+                             <img class= 'userinfo avatar' src= "${reply.user.image.png}"/>
+                             <h5 class= 'userinfo username'>${reply.user.username}</h5>
+                             <h6 class= "userinfo youReplied">you</h6>
+                             <p class= 'userinfo commentDate'>${reply.createdAt}</p>
+                             `
+                             infoReplyContainer.style.justifyContent = "space-around"
+                                //                  
+                                let repliesText = document.createElement('p');
+                                repliesContent.appendChild(repliesText)
+                                repliesText.className = "userCommentText";
+                                repliesText.classList.add('repliesText');
+                                repliesText.innerHTML = `
+                                            
+                                            ${reply.content}
+                                            
+                                            `
+            
+                                userActionsFlexContainer = document.createElement('div');
+                                repliesContent.appendChild(userActionsFlexContainer);
+                                userActionsFlexContainer.classList.add('userActionsFlexContainer');
+            
+                                votingContainer = document.createElement('div');
+                                userActionsFlexContainer.appendChild(votingContainer);
+                                votingContainer.classList.add('votingContainer');
+            
+                                plusButton = document.createElement('plusButton');
+                                votingContainer.appendChild(plusButton);
+                                plusButton.classList.add('iconButtons');
+                                plusButton.innerHTML = `
+                        <img class= "votingIcons" src="../images/icon-plus.svg">
+                        `
+            
+                                // Create a div that displays the number of votes in real time 
+                                voteCount = document.createElement('p');
+                                votingContainer.appendChild(voteCount);
+                                voteCount.classList.add('voteCount');
+                                voteCount.innerHTML= `
+                                
+                                ${reply.score}
+                                
+                                `
+                                
+                                minusButton = document.createElement('minusButton');
+                                votingContainer.appendChild(minusButton);
+                                minusButton.classList.add('iconButtons');
+                                minusButton.classList.add('minusButton');
+                                minusButton.innerHTML = `
+                        <img class = "votingIcons minus" src="../images/icon-minus.svg">
+                        `
+                                replyButton = document.createElement('button')
+                                replyButton.className = "replyButton";
+                                userActionsFlexContainer.appendChild(replyButton);
+                                replyButton.innerHTML = `
+                        <img class= "replyIcon" src = "../images/icon-delete.svg"> Reply
+                        `
+            
+            
+                            }
+            
+                            }
+                        }
+
+/* 
+    I placed the events listeners for the voting buttons and the display because:
+        - the nested replies share the same classes and variables which means
+        - IF I create and render the replies container after the event listeners are initiated then
+            * the newly created and rendered repies voting count will show the original score rather thn the current score 
+        saved to the local storage.                      
+
+*/
             if (localStorage.getItem('newVoteCount') === undefined || localStorage.getItem('newVoteCount') === localStorage.getItem(origScore[i])) {
 
                 voteCount.innerHTML = `
@@ -225,183 +404,9 @@ getCommentsData('data.json')
                 // localStorage.removeItem('minusClicks');
                 minusClicks = 0;
             })
-
-
-            // below is the the replies container, I am attempting to reuse the code for the 
-            // userinfoflexcontainer but have to change the path to the content
-
-            /* The purpose for the if staement?
-           
-                        -The reason is to control when and if the replies container is displayed or not
-                        - Based on what? Based on whether the replies array inside of the comments obj have content or are empty i.e undefined 
-           
-                        */
-            if (row.replies[i] === undefined) {
-
-                repliesFlexContainer.style.display = "none";
-
-            } else {
-                /*
-                                 -Below I used a for of loop to loop through replies array within every comment object 
-                                 -Then render every user object within the replies array one by one
-                                 -This should work for every reply in the replies array               
-           
-                            */
-                // Start debugging process below here! ____________________________________________________________________________________________________                           
-                for (reply of row.replies) {
-                    //testing the outout
-                    console.log('TESTING REPLIES ARRAY IN THE SECOND COMMENT OBJECT =>', reply)
-
-                    if(reply.user.username !== data.currentUser.username){
-
-                    let repliesContent = document.createElement('div');
-                    repliesFlexContainer.appendChild(repliesContent);
-                    repliesContent.className = 'repliesContent';
-                    //--THIS may notn need an ID--repliesContent.id = 'repliesContent' 
-                    /* if(row.id[i].replies != ""){
-                     }*/
-
-                    let infoReplyContainer = document.createElement('div')
-                    repliesContent.appendChild(infoReplyContainer)
-                    infoReplyContainer.className = "userInfoFlexContainer"
-                    infoReplyContainer.innerHTML = `
-                 <img class= 'userinfo avatar' src= "${reply.user.image.png}"/>
-                 <h5 class= 'userinfo username'>${reply.user.username}</h5>
-                 <p class= 'userinfo commentDate'>${reply.createdAt}</p>
-                 `
-                    //                  
-                    let repliesText = document.createElement('p');
-                    repliesContent.appendChild(repliesText)
-                    repliesText.className = "userCommentText";
-                    repliesText.classList.add('repliesText');
-                    repliesText.innerHTML = `
-                                
-                                ${reply.content}
-                                
-                                `
-
-                    userActionsFlexContainer = document.createElement('div');
-                    repliesContent.appendChild(userActionsFlexContainer);
-                    userActionsFlexContainer.classList.add('userActionsFlexContainer');
-
-                    votingContainer = document.createElement('div');
-                    userActionsFlexContainer.appendChild(votingContainer);
-                    votingContainer.classList.add('votingContainer');
-
-                    plusButton = document.createElement('plusButton');
-                    votingContainer.appendChild(plusButton);
-                    plusButton.classList.add('iconButtons');
-                    plusButton.innerHTML = `
-            <img class= "votingIcons" src="../images/icon-plus.svg">
-            `
-
-                    // Create a div that displays the number of votes in real time 
-                    voteCount = document.createElement('p');
-                    votingContainer.appendChild(voteCount);
-                    voteCount.classList.add('voteCount');
-                    voteCount.innerHTML= `
-                    
-                    ${reply.score}
-                    
-                    `
-
-                    replyButton = document.createElement('button')
-                    replyButton.className = "replyButton";
-                    userActionsFlexContainer.appendChild(replyButton);
-                    replyButton.innerHTML = `
-            <img class= "replyIcon" src = "../images/icon-reply.svg"> Reply
-            `
-
-                    minusButton = document.createElement('minusButton');
-                    votingContainer.appendChild(minusButton);
-                    minusButton.classList.add('iconButtons');
-                    minusButton.classList.add('minusButton');
-                    minusButton.innerHTML = `
-            <img class = "votingIcons minus" src="../images/icon-minus.svg">
-`
-                    /* repliesFlexContainer.appendChild(userCommentText);
-                     userCommentText.innerHTML = `
-                     ${reply.content}
-                     `*/
-                } else {
-
-                    let repliesContent = document.createElement('div');
-                    repliesFlexContainer.appendChild(repliesContent);
-                    repliesContent.className = 'repliesContent';
-                    //--THIS may notn need an ID--repliesContent.id = 'repliesContent' 
-                    /* if(row.id[i].replies != ""){
-                     }*/
-
-                    let infoReplyContainer = document.createElement('div')
-                    repliesContent.appendChild(infoReplyContainer)
-                    infoReplyContainer.className = "userInfoFlexContainer"
-                    infoReplyContainer.innerHTML = `
-                 <img class= 'userinfo avatar' src= "${reply.user.image.png}"/>
-                 <h5 class= 'userinfo username'>${reply.user.username}</h5>
-                 <h6 class= "userinfo youReplied">you</h6>
-                 <p class= 'userinfo commentDate'>${reply.createdAt}</p>
-                 `
-                 infoReplyContainer.style.justifyContent = "space-around"
-                    //                  
-                    let repliesText = document.createElement('p');
-                    repliesContent.appendChild(repliesText)
-                    repliesText.className = "userCommentText";
-                    repliesText.classList.add('repliesText');
-                    repliesText.innerHTML = `
-                                
-                                ${reply.content}
-                                
-                                `
-
-                    userActionsFlexContainer = document.createElement('div');
-                    repliesContent.appendChild(userActionsFlexContainer);
-                    userActionsFlexContainer.classList.add('userActionsFlexContainer');
-
-                    votingContainer = document.createElement('div');
-                    userActionsFlexContainer.appendChild(votingContainer);
-                    votingContainer.classList.add('votingContainer');
-
-                    plusButton = document.createElement('plusButton');
-                    votingContainer.appendChild(plusButton);
-                    plusButton.classList.add('iconButtons');
-                    plusButton.innerHTML = `
-            <img class= "votingIcons" src="../images/icon-plus.svg">
-            `
-
-                    // Create a div that displays the number of votes in real time 
-                    voteCount = document.createElement('p');
-                    votingContainer.appendChild(voteCount);
-                    voteCount.classList.add('voteCount');
-                    voteCount.innerHTML= `
-                    
-                    ${reply.score}
-                    
-                    `
-
-                    replyButton = document.createElement('button')
-                    replyButton.className = "replyButton";
-                    userActionsFlexContainer.appendChild(replyButton);
-                    replyButton.innerHTML = `
-            <img class= "replyIcon" src = "../images/icon-reply.svg"> Reply
-            `
-
-                    minusButton = document.createElement('minusButton');
-                    votingContainer.appendChild(minusButton);
-                    minusButton.classList.add('iconButtons');
-                    minusButton.classList.add('minusButton');
-                    minusButton.innerHTML = `
-            <img class = "votingIcons minus" src="../images/icon-minus.svg">
-            `
-
-                }
-
-                }
-            }
-        })
-
-
-
+         
     })
+})
 
 
 // add clickCount as the parameter to a function whos job is to increase the displayed vote count:
