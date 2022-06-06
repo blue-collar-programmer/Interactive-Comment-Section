@@ -262,7 +262,7 @@ p {
     border-radius: 5px;
     font-weight: 600;
     font-size: 16px;
-    color:   hsl(238, 40%, 52%);;
+    color:   hsl(238, 40%, 52%);
     background-color: transparent;
 }
 
@@ -271,6 +271,11 @@ p {
     background-color:hsl(223, 19%, 93%) ;
 }
 
+
+.replyingToUsername {
+    color:   hsl(238, 40%, 52%);
+    font-weight: 500;
+}
 /*.deleteAndEditBtns {
     display:flex;
     justify-content: flex-end;

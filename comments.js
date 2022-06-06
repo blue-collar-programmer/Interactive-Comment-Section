@@ -120,6 +120,10 @@ getCommentsData('data.json')
             let voteCount = document.createElement('p');
             votingContainer.appendChild(voteCount);
             voteCount.classList.add('voteCount');
+            voteCount.innerHTML = `
+            ${localStorage.getItem(origScore[i])}
+            
+            `
 
             let replyButton = document.createElement('button')
             replyButton.className = "replyButton";
@@ -138,6 +142,25 @@ getCommentsData('data.json')
                         <img class = "votingIcons minus" src="../images/icon-minus.svg">
             `
 
+// Creating a reply box below every comment box- basically resuing some of the create new comment code in the html file _________________________
+            // Steps: after creating this box, set default display to none- 2: next add an event listener to the reply button that changes the display
+            let replyTextBox = document.createElement('div') ;
+            replyTextBox.id ="replyTextBox"+[i];
+            replyTextBox.className = "commentContainer"
+            replyTextBox.classList.add('newCommentBox');
+            allCommentsContainer.appendChild(replyTextBox);
+
+            replyTextBox.innerHTML = `
+            
+            <div class="grid-container">
+            <img class="avatar currentUsersAvatar" id="currentUsersAvatar" src= "${data.currentUser.image.png}">
+          <textarea class="commentTextArea" placeholder="Add a comment" id="commentTextArea" ></textarea>
+          <button class="send-btn">REPLY</button>
+        </div>
+            
+            `
+            replyTextBox.style.display = "none"
+//________________________________________________________________________________________________________
             // below is the the replies container, I am attempting to reuse the code for the 
             // userinfoflexcontainer but have to change the path to the content
 
@@ -158,7 +181,6 @@ getCommentsData('data.json')
                                              -This should work for every reply in the replies array               
                        
                                         */
-                // Start debugging process below here! ____________________________________________________________________________________________________                           
                 for (reply of row.replies) {
                     //testing the outout
                     console.log('TESTING REPLIES ARRAY IN THE SECOND COMMENT OBJECT =>', reply)
@@ -187,7 +209,7 @@ getCommentsData('data.json')
                         repliesText.classList.add('repliesText');
                         repliesText.innerHTML = `
                                             
-                                            ${reply.content}
+                                        <span class= "replyingToUsername">@${reply.replyingTo}</span>    ${reply.content}
                                             
                                             `
 
@@ -260,7 +282,7 @@ getCommentsData('data.json')
                         repliesText.classList.add('repliesText');
                         repliesText.innerHTML = `
                                             
-                                            ${reply.content}
+                        <span class= "replyingToUsername">@${reply.replyingTo}</span> ${reply.content}
                                             
                                             `
 
@@ -300,7 +322,7 @@ getCommentsData('data.json')
                         let deleteAndEditBtns = document.createElement('div');
                         deleteAndEditBtns.className = "deletAndEditBtns";
                         userActionsFlexContainer.appendChild(deleteAndEditBtns);
-                        
+
 
                         let deleteButton = document.createElement('button')
                         deleteButton.className = "deleteButton";
