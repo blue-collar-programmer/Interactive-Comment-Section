@@ -270,3 +270,8 @@ p {
     cursor: pointer;
     background-color:hsl(223, 19%, 93%) ;
 }
+
+/*.deleteAndEditBtns {
+    display:flex;
+    justify-content: flex-end;
+}*/
