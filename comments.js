@@ -142,12 +142,12 @@ getCommentsData('data.json')
                         <img class = "votingIcons minus" src="../images/icon-minus.svg">
             `
 
-// Creating a reply box below every comment box- basically resuing some of the create new comment code in the html file _________________________
+            // Creating a reply box below every comment box- basically resuing some of the create new comment code in the html file _________________________
             // Steps: after creating this box, set default display to none- 2: next add an event listener to the reply button that changes the display
-            let replyTextBox = document.createElement('div') ;
-            replyTextBox.id ="replyTextBox"+[i];
+            let replyTextBox = document.createElement('div');
+            replyTextBox.id = "replyTextBox" + [i];
             replyTextBox.className = "commentContainer"
-            replyTextBox.classList.add('newCommentBox');
+            replyTextBox.classList.add('newReplyBox');
             allCommentsContainer.appendChild(replyTextBox);
 
             replyTextBox.innerHTML = `
@@ -159,8 +159,10 @@ getCommentsData('data.json')
         </div>
             
             `
-            replyTextBox.style.display = "none"
-//________________________________________________________________________________________________________
+// Setting the default display of the replyTextBox to  none. This will only change if the reply button is fired             
+            replyTextBox.style.display = "none";
+
+            //________________________________________________________________________________________________________
             // below is the the replies container, I am attempting to reuse the code for the 
             // userinfoflexcontainer but have to change the path to the content
 
@@ -193,6 +195,24 @@ getCommentsData('data.json')
                         //--THIS may notn need an ID--repliesContent.id = 'repliesContent' 
                         /* if(row.id[i].replies != ""){
                          }*/
+
+                         let replyTextBox = document.createElement('div');
+                         replyTextBox.id = "replyTextBox";
+                         replyTextBox.className = "newReplyBox";
+                         
+                         replyTextBox.classList.add("commentContainer");
+                         repliesFlexContainer.appendChild(replyTextBox);
+
+                        replyTextBox.innerHTML = `
+            
+            <div class="grid-container">
+            <img class="avatar currentUsersAvatar" id="currentUsersAvatar" src= "${data.currentUser.image.png}">
+          <textarea class="commentTextArea" placeholder="Add a comment" id="commentTextArea" ></textarea>
+          <button class="send-btn">REPLY</button>
+        </div>
+            
+            `
+                      replyTextBox.style.display = "none";
 
                         let infoReplyContainer = document.createElement('div')
                         repliesContent.appendChild(infoReplyContainer)
@@ -265,6 +285,22 @@ getCommentsData('data.json')
                         /* if(row.id[i].replies != ""){
                          }*/
 
+                        /*let replyTextBox = document.createElement('div');
+                        replyTextBox.id = "replyTextBox" + [i];
+                        replyTextBox.className = "commentContainer"
+                        replyTextBox.classList.add('newCommentBox');
+                        repliesFlexContainer.appendChild(replyTextBox);
+
+                        replyTextBox.innerHTML = `
+            
+                        <div class="grid-container">
+                        <img class="avatar currentUsersAvatar" id="currentUsersAvatar" src= "${data.currentUser.image.png}">
+                      <textarea class="commentTextArea" placeholder="Add a comment" id="commentTextArea" ></textarea>
+                      <button class="send-btn">REPLY</button>
+                    </div>
+                        
+                        `*/
+                        //display:none;
                         let infoReplyContainer = document.createElement('div')
                         repliesContent.appendChild(infoReplyContainer)
                         infoReplyContainer.className = "userInfoFlexContainer"

@@ -27,13 +27,6 @@ p {
     border-radius: 10px;
 }
 
-/*.newCommentBox {
-    
-    display:flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-*/
 
 .grid-container {
     margin: auto;
@@ -280,3 +273,10 @@ p {
     display:flex;
     justify-content: flex-end;
 }*/
+
+.newReplyBox {
+    max-width: 600px;
+    min-width:355px;
+    width: 80%;
+    margin-bottom:25px
+}
