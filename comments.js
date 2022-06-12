@@ -142,6 +142,11 @@ getCommentsData('data.json')
                         <img class = "votingIcons minus" src="../images/icon-minus.svg">
             `
 
+            replyButton.addEventListener('click', function (e) {
+                console.log("here's the target=>",e.target) 
+                alert('clicked')
+            })
+
             // Creating a reply box below every comment box- basically resuing some of the create new comment code in the html file _________________________
             // Steps: after creating this box, set default display to none- 2: next add an event listener to the reply button that changes the display
             let replyTextBox = document.createElement('div');
@@ -149,6 +154,7 @@ getCommentsData('data.json')
             replyTextBox.className = "commentContainer"
             replyTextBox.classList.add('newReplyBox');
             allCommentsContainer.appendChild(replyTextBox);
+            console.log('replyTextBox current id', replyTextBox.id )
 
             replyTextBox.innerHTML = `
             
@@ -159,7 +165,7 @@ getCommentsData('data.json')
         </div>
             
             `
-// Setting the default display of the replyTextBox to  none. This will only change if the reply button is fired             
+            // Setting the default display of the replyTextBox to  none. This will only change if the reply button is fired             
             replyTextBox.style.display = "none";
 
             //________________________________________________________________________________________________________
@@ -184,6 +190,7 @@ getCommentsData('data.json')
                        
                                         */
                 for (reply of row.replies) {
+                    i = 0;
                     //testing the outout
                     console.log('TESTING REPLIES ARRAY IN THE SECOND COMMENT OBJECT =>', reply)
 
@@ -196,12 +203,12 @@ getCommentsData('data.json')
                         /* if(row.id[i].replies != ""){
                          }*/
 
-                         let replyTextBox = document.createElement('div');
-                         replyTextBox.id = "replyTextBox";
-                         replyTextBox.className = "newReplyBox";
-                         
-                         replyTextBox.classList.add("commentContainer");
-                         repliesFlexContainer.appendChild(replyTextBox);
+                        let replyTextBox = document.createElement('div');
+                        replyTextBox.id = "replyTextBox";
+                        replyTextBox.className = "newReplyBox";
+
+                        replyTextBox.classList.add("commentContainer");
+                        repliesFlexContainer.appendChild(replyTextBox);
 
                         replyTextBox.innerHTML = `
             
@@ -212,7 +219,7 @@ getCommentsData('data.json')
         </div>
             
             `
-                      replyTextBox.style.display = "none";
+                        replyTextBox.style.display = "none";
 
                         let infoReplyContainer = document.createElement('div')
                         repliesContent.appendChild(infoReplyContainer)
@@ -276,8 +283,12 @@ getCommentsData('data.json')
                          userCommentText.innerHTML = `
                          ${reply.content}
                          `*/
-                    } else {
+                         replyButton.addEventListener('click', function (e) {
+                            console.log("here's the target=>",e.target) 
+                            alert('clicked')
+                        })
 
+                    } else {
                         let repliesContent = document.createElement('div');
                         repliesFlexContainer.appendChild(repliesContent);
                         repliesContent.className = 'repliesContent';
@@ -341,12 +352,14 @@ getCommentsData('data.json')
                         voteCount = document.createElement('p');
                         votingContainer.appendChild(voteCount);
                         voteCount.classList.add('voteCount');
+                        localStorage.setItem('id' + [i], reply.score);
+                        console.log('New REPLY SCORE', localStorage.getItem('id' + [i]))
+
                         voteCount.innerHTML = `
                                 
-                                ${reply.score}
+                                ${Number(localStorage.getItem('id'+[i]))}
                                 
                                 `
-
                         minusButton = document.createElement('minusButton');
                         votingContainer.appendChild(minusButton);
                         minusButton.classList.add('iconButtons');
@@ -376,6 +389,7 @@ getCommentsData('data.json')
                     }
 
                 }
+                i++
             }
 
             /* 
@@ -473,6 +487,8 @@ getCommentsData('data.json')
                 // localStorage.removeItem('minusClicks');
                 minusClicks = 0;
             })
+
+            
 
         })
     })
